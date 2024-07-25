@@ -150,3 +150,11 @@ from pedido
 where data_emissao is not null
 and data_cancelamento is null
 and data_faturamento is null;
+
+
+5--
+SELECT ip.id_produto, sum(ip.quantidade)as quantidade_vendida, sum(ip.quantidade) * ip.preco_praticado as total_vendido, count(p.id_pedido) as pedidos, sum(cl.id_cliente) as clientes
+FROM itens_pedido ip, pedido p, clientes cl
+where p.id_pedido = ip.id_pedido
+and cl.id_cliente = p.id_cliente
+GROUP BY ip.id_produto, ip.preco_praticado, cl.id_cliente;
